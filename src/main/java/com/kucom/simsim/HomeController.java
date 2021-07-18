@@ -23,4 +23,10 @@ public class HomeController {
 	public void login() {
 		logger.info("/login (GET)");
 	}
+	
+	@GetMapping(value = "/SimChat")
+	public String GetChatting() {
+		logger.info("/SimChat (GET)");
+		return "ChatForm";
+	}
 }

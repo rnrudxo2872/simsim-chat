@@ -15,7 +15,7 @@
 
 <button>랜덤 채팅</button>
 <button>채팅방 보러가기</button>
-<button>채팅(테스트용)</button>
+<a href="/SimChat"><button>채팅(테스트용)</button></a>
 <a href="/login"><button>login</button></a>
 </body>
 </html>
