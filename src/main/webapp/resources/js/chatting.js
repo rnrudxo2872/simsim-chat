@@ -1,7 +1,11 @@
 const StartBtn = document.getElementById("chatting__startBtn")
+const MessagesContainer = document.getElementById("messagesContainer");
+const CurSender = document.getElementById("chatting__sender");
+const CurMsg = document.getElementById("chatting__msg");
+const SendBtn = document.getElementById("chatting__sendBtn");
+const ClearBtn = document.getElementById("chatting__clearBtn");
 
 let ws;
-let message;
 
 const openSocket = () => {
     console.log("Now you click open socket button.");
@@ -19,7 +23,7 @@ const openSocket = () => {
     }
 
     ws.onmessage = (event) => {
-        console.log("Now you write message.");
+        console.log(`Now you write message.${event.data}`);
     }
 
     ws.onclose = (event) => {
@@ -28,7 +32,14 @@ const openSocket = () => {
 }
 
 const sendMsg = () => {
-    const TEXT = 
+    if(ws === undefined && ws.readyState === WebSocket.CLOSED){
+        console.warn("잘못된 접근!");
+        return;
+    }
+    const TEXT = `${CurSender.value},${CurMsg.value}`
+    ws.send(TEXT)
+    CurMsg.value = "";
 }
 
-StartBtn.addEventListener("click",openSocket)
+StartBtn.addEventListener("click",openSocket);
+SendBtn.addEventListener("click",sendMsg);
