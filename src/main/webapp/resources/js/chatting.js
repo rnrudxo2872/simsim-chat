@@ -4,7 +4,7 @@ let ws;
 let message;
 
 const openSocket = () => {
-    console.log("클릭했어?!?!?!?!");
+    console.log("Now you click open socket button.");
     if(ws !== undefined && ws.readyState !== WebSocket.CLOSED){
         console.log("already exists WebSocket");
         return;
@@ -25,7 +25,10 @@ const openSocket = () => {
     ws.onclose = (event) => {
         console.log("Chat disconnected.");
     }
+}
 
+const sendMsg = () => {
+    const TEXT = 
 }
 
 StartBtn.addEventListener("click",openSocket)
