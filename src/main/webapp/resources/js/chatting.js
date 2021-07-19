@@ -24,6 +24,11 @@ const openSocket = () => {
 
     ws.onmessage = (event) => {
         console.log(`Now you write message.${event.data}`);
+        
+        const msgData = JSON.parse(event.data);
+        console.log(msgData);
+        
+        writeMessage(msgData);
     }
 
     ws.onclose = (event) => {
@@ -39,6 +44,25 @@ const sendMsg = () => {
     const TEXT = `${CurSender.value},${CurMsg.value}`
     ws.send(TEXT)
     CurMsg.value = "";
+}
+
+const writeMessage = (data) => {
+    const isOrigin = data.sender === "me" ? "origin" : "other";
+    const wrapper = document.createElement('div');
+	const sender = document.createElement('div');
+	const message = document.createElement('div');    
+    
+    wrapper.className = isOrigin;
+    sender.className = 'sender'
+    message.className = 'message'
+    
+    sender.innerHTML = `<span class="sender__text">${data.sender}</span>`
+    message.innerHTML = `<span class="message__text">${data.message}</span>`
+    
+    wrapper.appendChild(sender);
+    wrapper.appendChild(message);
+    
+    MessagesContainer.appendChild(wrapper)
 }
 
 StartBtn.addEventListener("click",openSocket);
