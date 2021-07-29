@@ -13,12 +13,14 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@logExecutionTime
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 		logger.info("/ (GET)");
 		return "index";
 	}
 	
+	@logExecutionTime
 	@GetMapping(value = "/login")
 	public void login() {
 		logger.info("/login (GET)");
